@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from drf_app.models import WatchList, StreamPlatform, Review
+
+from drf_app.models import Review, StreamPlatform, WatchList
 
 
 class ReviewSerializer(serializers.ModelSerializer):

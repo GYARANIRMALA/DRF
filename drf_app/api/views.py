@@ -1,23 +1,23 @@
-from drf_app.models import WatchList, StreamPlatform, Review
-from drf_app.api.serializers import WatchListSerializer, StreamPlatformSerializer, ReviewSerializer
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.views import APIView
-from rest_framework import mixins
-from rest_framework import generics
-from rest_framework.throttling import UserRateThrottle, AnonRateThrottle, ScopedRateThrottle
-from drf_app.api.throttling import ReviewCreateThrottle, ReviewListThrottle
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters
-from drf_app.api.pagination import WatchListPagination, WatchListLOPagination, WatchListCPagination
+from rest_framework import filters, generics, mixins, status, viewsets
+from rest_framework.decorators import api_view
+from rest_framework.exceptions import ValidationError
+from rest_framework.permissions import (IsAuthenticated,
+                                        IsAuthenticatedOrReadOnly)
+from rest_framework.response import Response
+from rest_framework.throttling import (AnonRateThrottle, ScopedRateThrottle,
+                                       UserRateThrottle)
+from rest_framework.views import APIView
 
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
-from rest_framework.exceptions import ValidationError
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from drf_app.api.pagination import (WatchListCPagination,
+                                    WatchListLOPagination, WatchListPagination)
 from drf_app.api.permissions import IsAdminOrReadOnly, IsReviewUserOrReadOnly
+from drf_app.api.serializers import (ReviewSerializer,
+                                     StreamPlatformSerializer,
+                                     WatchListSerializer)
+from drf_app.api.throttling import ReviewCreateThrottle, ReviewListThrottle
+from drf_app.models import Review, StreamPlatform, WatchList
 
 
 class UserReview(generics.ListAPIView):

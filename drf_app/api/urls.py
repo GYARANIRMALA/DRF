@@ -1,10 +1,10 @@
-from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
+from django.urls import include, path
 # from drf_app.api.views import movie_list, movie_detail
-from drf_app.api.views import (WatchListAV, WatchListDetailAV, ReviewList, UserReview, WatchListGV,
-                            ReviewDetail, ReviewCreate, StreamPlatformVS)
-
+from drf_app.api.views import (ReviewCreate, ReviewDetail, ReviewList,
+                               StreamPlatformVS, UserReview, WatchListAV,
+                               WatchListDetailAV, WatchListGV)
 
 router = DefaultRouter()
 router.register('stream', StreamPlatformVS, basename='streamplatform')
